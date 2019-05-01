@@ -9,23 +9,26 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func rootHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello gorilla/mux world!\n")
+// RootHandler is mapping "/"
+func RootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello gorilla/mux world!")
 }
 
-func getSampleHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "GET /sample\n")
+// GetSampleHandler is mapping "/sample"
+func GetSampleHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "GET /sample")
 }
 
-func postSampleHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "POST /sample\n")
+// PostSampleHandler is mapping "/sample"
+func PostSampleHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "POST /sample")
 }
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", rootHandler)
-	r.HandleFunc("/sample", postSampleHandler).Methods("POST")
-	r.HandleFunc("/sample", getSampleHandler).Methods("GET")
+	r.HandleFunc("/", RootHandler)
+	r.HandleFunc("/sample", GetSampleHandler).Methods("GET")
+	r.HandleFunc("/sample", PostSampleHandler).Methods("POST")
 
 	// Server configuration
 	srv := &http.Server{
